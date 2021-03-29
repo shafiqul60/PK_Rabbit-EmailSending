@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+@model IList<EmailSending.Models.MailModel>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+
+        body {
+            font-family: Arial;
+            font-size: 9pt;
+        }
+    </style>
+</head>
+<body>
+    <h4>Mail Details</h4>
+    <hr />
+    <div id="Grid">
+        <table cellpadding="5" cellspacing="0" style="border: 1px solid #ccc;font-size: 9pt; width:100%;">
+            <tr>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">To</th>      
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">Subject</th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">Mail Body</th>
+              
+            </tr>
+            @foreach (var itm in Model)
+            {
+
+                <tr>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(m => itm.To)
+                    </td>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(m => itm.Subject)
+                    </td>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(m => itm.Body)
+                    </td>
+                   
+                </tr>
+            }
+
+        </table>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            @using (Html.BeginForm("Export", "Mail", FormMethod.Post))
+            {
+                <input type="hidden" name="GridHtml" />
+                <input class="btn-warning" type="submit" id="btnSubmit" value="Export PDF" />
+            }
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript">$(function () {
+                    $("#btnSubmit").click(function () {
+                        $("input[name='GridHtml']").val($("#Grid").html());
+                    });
+                });</script>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <div>
+                @using (Html.BeginForm("ExportToExcel", "Mail", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <div>
+                        <input type="submit" value="Export Excel" class="btn-danger" />
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+

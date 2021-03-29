@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "SendEmail";
+}
+
+<h2> SendEmail </h2> <br />
+
+
+
+
+
+<form method="post">
+    <div class="container">
+        <span class="form-control-static"> Receiver: </span>
+        <input class="form-control" type="text" name="receiver" /> <br />
+        <span class="form-control-static"> Subject: </span>
+        <input class="form-control" type="text" name="subject" /> <br />
+        <span class="form-control-static"> Message: </span>
+        <input class="form-control" type="text" name="message" /> <br />
+        <input class="btn btn-primary" type="submit" value="Send" />
+    </div>
+</form>
+
+<br />
+<br />
+<br />
+@if (ViewBag.Suc != null)
+{
+    <span style="color:green; font-weight:bolder">@ViewBag.Suc</span>
+
+}
+else
+{
+    <span style="color:red; font-weight:bolder">@ViewBag.Error</span>
+}
